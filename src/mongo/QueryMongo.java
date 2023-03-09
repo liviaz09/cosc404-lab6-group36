@@ -100,7 +100,8 @@ public class QueryMongo
 		
 		// TODO: Create a collection called "data". Note only need to get the collection as will be created if does not exist.
 		// See: https://docs.mongodb.com/manual/reference/method/db.createCollection/
-		// See: https://docs.mongodb.com/drivers/java/sync/current/fundamentals/databases-collections/		
+		// See: https://docs.mongodb.com/drivers/java/sync/current/fundamentals/databases-collections/	
+		db.createCollection("data");
 		
 		// TODO: Add 5 objects to collection of the form: key, name, num, values
 		// 		- where key is an increasing integer starting at 1 (i.e. 1, 2, 3, ...)
@@ -111,6 +112,12 @@ public class QueryMongo
 		// See: https://docs.mongodb.com/drivers/java/sync/current/quick-start/
 		// See: https://docs.mongodb.com/manual/reference/method/db.collection.insert/
 		// See: https://mongodb.github.io/mongo-java-driver/4.4/apidocs/mongodb-driver-core/com/mongodb/BasicDBList.html
+		
+		MongoCollection<Document> data = db.getCollection("data");
+		db.data.insert();
+		//([{key: key, name: name, num: key, values: {val: key, text:name}, {val: key++, text}}]);
+
+
 					   
 	}
     
