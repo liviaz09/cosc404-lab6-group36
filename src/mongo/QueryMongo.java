@@ -119,9 +119,9 @@ public class QueryMongo
 			String name = "text"+key;
 			int num = key;
 			BasicDBList values= new BasicDBList();
-        values.add(new BasicDBObject("val", 1).append("text", "text1"));
-        values.add(new BasicDBObject("val", 2).append("text", "text2"));
-        values.add(new BasicDBObject("val", 3).append("text", "text3"));
+        values.add(new BasicDBObject("val", key).append("text", "text"+(key)));
+        values.add(new BasicDBObject("val", key+1).append("text", "text"+(key+1)));
+        values.add(new BasicDBObject("val", key+2).append("text", "text"+(key+2)));
         data.insertOne(new Document("key", key).append("name", name).append("num", num).append("values", values));
 		}
 		//([{key: key, name: name, num: key, values: {val: key, text:name}, {val: key++, text}}]);
