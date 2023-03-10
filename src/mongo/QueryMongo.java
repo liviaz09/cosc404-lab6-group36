@@ -2,9 +2,13 @@ package mongo;
 
 import static com.mongodb.client.model.Projections.excludeId;
 import static com.mongodb.client.model.Projections.include;
+
+import java.nio.file.DirectoryStream.Filter;
+
 import static com.mongodb.client.model.Projections.fields;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.junit.platform.console.shadow.picocli.CommandLine.Help.Ansi.Text;
 
 import com.mongodb.BasicDBList;
@@ -14,6 +18,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 
 /**
  * Program to create a collection, insert JSON objects, and perform simple queries on MongoDB.
@@ -171,8 +177,10 @@ public class QueryMongo
     	// Use the code in query() method as a starter.  You must return a cursor to the results.
     	// See: https://docs.mongodb.com/drivers/java/sync/current/usage-examples/find/
     	
-		MongoCollection<Document> col = db.getCollection(COLLECTION_NAME);		
-		return col.find().iterator();		// Note: Need to modify query as this is currently returning all documents		
+		MongoCollection<Document> col = db.getCollection(COLLECTION_NAME);	
+		// get a filter for key <4
+		MongoCursor<Document> cur = col.find(Filters.lt("key",4)).projection(Projections.fields(Projections.include("key","name","num"),Projections.excludeId())).iterator();
+		return cur; 		// Note: Need to modify query as this is currently returning all documents		
     }
     
     /**
