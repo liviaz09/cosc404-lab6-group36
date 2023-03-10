@@ -193,10 +193,10 @@ public class QueryMongo
     	// See: https://docs.mongodb.com/manual/reference/operator/query/or/    	
     	// See: https://docs.mongodb.com/manual/reference/operator/query/elemMatch/
 
-    	MongoCollection<Document> col = db.getCollection(COLLECTION_NAME);		
-		// Note: Need to modify query as this is currently returning all documents
-    	Document query = new Document();
-		return col.find(query).iterator();				
+    	MongoCollection<Document> col = db.getCollection(COLLECTION_NAME);	
+		MongoCursor<Document> cur = col.find(Filters.or(Filters.gt("key",2),Filters.elemMatch("values", Filters.eq("val", 4)))).iterator();
+		return cur; 	
+		// Note: Need to modify query as this is currently returning all documents				
     }          
     
     /**
