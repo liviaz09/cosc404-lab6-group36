@@ -72,7 +72,10 @@ public class QueryPostgres
 					
 		// TODO: Create a table called "data"
 		// Table should have field "id" as a serial primary key and field "text" as a json field		
-		
+		PreparedStatement ps = con.prepareStatement("CREATE TABLE IF NOT EXISTS"+ TABLE_NAME+"(id SERIAL PRIMARY KEY, text json NOT NULL)");
+        ps.executeUpdate();
+        ps.close();
+
 		// TODO: Add 5 objects to table of the form: key, name, num, values
 		// 		- where key is an increasing integer starting at 1 (i.e. 1, 2, 3, ...)
 		//		- name is "text"+key (e.g. "text1")
@@ -80,6 +83,19 @@ public class QueryPostgres
 		//		- values is an array of 3 objects of the form: {"val":1, "text":"text1"}, {"val":2, "text":"text2"}, {"val":3, "text":"text3"}
 		//			- The example is above for key = 1, for key = 2 the values should be 2,3,4, etc.
 		// Note: Use PreparedStatements!
+        //PreparedStatement ps1 = con.prepareStatement("INSERT INTO data(text) VALUES('{"key":1, "name":"text"+key, "num": key, "values": {"val":key, "text":name}, {"val":key, "text":name}, {"val":key, "text":name}}')");
+        ps.executeUpdate();
+        PreparedStatement stm = null; 
+        try{
+            stm = con.prepareStatement("INSERT INTO data(text) VALUES(?)");
+            for(int i= 0; i<5; i++){
+                //stm.setObject(1, {key:});
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
 		
 		
 	}
