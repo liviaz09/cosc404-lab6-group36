@@ -5,6 +5,7 @@ import static com.mongodb.client.model.Projections.include;
 import static com.mongodb.client.model.Projections.fields;
 
 import org.bson.Document;
+import org.junit.platform.console.shadow.picocli.CommandLine.Help.Ansi.Text;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -139,7 +140,11 @@ public class QueryMongo
 		// See: https://docs.mongodb.com/drivers/java/sync/current/usage-examples/updateOne/		
 
 		MongoCollection<Document> col = db.getCollection(COLLECTION_NAME);
-
+		//get the record and save it as a document
+		BasicDBObject fil = new BasicDBObject("key",key);
+		BasicDBObject up = new BasicDBObject("$mul", new BasicDBObject("key", 10))
+		.append("$set", new BasicDBObject("name", "text" + (key * 10)));
+		col.updateMany(fil, up);
 	}
     
     /**
