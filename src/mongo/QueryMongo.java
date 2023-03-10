@@ -112,8 +112,19 @@ public class QueryMongo
 		// See: https://docs.mongodb.com/drivers/java/sync/current/quick-start/
 		// See: https://docs.mongodb.com/manual/reference/method/db.collection.insert/
 		// See: https://mongodb.github.io/mongo-java-driver/4.4/apidocs/mongodb-driver-core/com/mongodb/BasicDBList.html
-		
-		
+    
+    MongoCollection<Document> data = db.getCollection("data");
+		for(int i =1;i<=5;i++){
+			int key =i;
+			String name = "text"+key;
+			int num = key;
+			BasicDBList values= new BasicDBList();
+        values.add(new BasicDBObject("val", 1).append("text", "text1"));
+        values.add(new BasicDBObject("val", 2).append("text", "text2"));
+        values.add(new BasicDBObject("val", 3).append("text", "text3"));
+        data.insertOne(new Document("key", key).append("name", name).append("num", num).append("values", values));
+		}
+		//([{key: key, name: name, num: key, values: {val: key, text:name}, {val: key++, text}}]);
 
 
 					   
