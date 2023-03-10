@@ -113,9 +113,7 @@ public class QueryMongo
 		// See: https://docs.mongodb.com/manual/reference/method/db.collection.insert/
 		// See: https://mongodb.github.io/mongo-java-driver/4.4/apidocs/mongodb-driver-core/com/mongodb/BasicDBList.html
 		
-		MongoCollection<Document> data = db.getCollection("data");
-		db.data.insert();
-		//([{key: key, name: name, num: key, values: {val: key, text:name}, {val: key++, text}}]);
+		
 
 
 					   
